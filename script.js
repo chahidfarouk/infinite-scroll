@@ -4,6 +4,7 @@ const loader = document.getElementById('loader');
 let ready = false;
 let imagesLoaded = 0;
 let totalImages = 0;
+
 let photosArray = [];
 
 // Unsplash API 
@@ -71,8 +72,6 @@ window.addEventListener('scroll', () => {
         getPhotos();
     }
 })
-
-
 
 // On Load
 getPhotos();

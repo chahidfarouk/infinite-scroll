@@ -1,0 +1,9 @@
+1.The page loads → the loader spinner is hidden initially (it only appears when fetching more photos later). The script requests 30 random photos from the Unsplash API.
+2.While the photos are being fetched → nothing is shown yet. Once the data arrives, the script creates <a> and <img> elements for each photo and adds them to the image container.
+3.As each image loads → a counter (imagesLoaded) increases. The loader remains visible until all 30 images have finished loading. Then the loader disappears and ready becomes true (meaning "ready to load more when scrolling").
+4.If an image has no description (alt_description is missing) → the alt and title attributes become null or an empty string, but the image still displays. (Unsplash usually provides descriptions, but if not, it's just blank.)
+5.User scrolls down the page → the scroll event constantly checks: if the bottom of the visible window is within 1000 pixels of the total page height AND ready is true, then it immediately sets ready to false (to prevent multiple triggers) and fetches the next 30 photos.
+6.New photos are fetched and appended → they appear below the existing ones. Each new image triggers the imageLoaded function again. When all 30 new images have loaded, ready becomes true again, allowing another scroll‑to‑load cycle.
+7.If the user scrolls very fast → the ready flag ensures that only one batch is loaded at a time. No duplicate requests happen.
+8.If the API rate limit is exceeded (50 requests per hour) → an error occurs, but the catch block is empty so nothing visibly breaks. The user simply won't see new photos until the limit resets (or the page is reloaded after an hour).
+
